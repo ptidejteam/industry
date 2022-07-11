@@ -1,0 +1,11 @@
+{
+    "name": "node-red-template-lower-case",
+    "node-red": {
+        "nodes": {
+            "lower-case": "template-lower-case.js"
+        }
+    },
+    "dependencies": {
+        
+    }
+}
