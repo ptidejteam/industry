@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "node-red": {
     "nodes": {
-      "lower-case": "template-lower-case.js"
+      "lower-case": "lower-case.js"
     }
   },
   "main": "lower-case.js",
