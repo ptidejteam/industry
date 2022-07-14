@@ -1,0 +1,10 @@
+{
+  "name": "testnode",
+  "version": "1.0.0",
+  "description": "",
+  "node-red": {
+    "nodes": {
+        "lower-case": "lower-case.js"
+      }
+    }
+}

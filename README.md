@@ -6,22 +6,14 @@ project-showcase-industry4.0
 
 starting node-red
 ```bash
-$ ./node-red
+$ cd /node-red
+$ node red.js
 ```
 
-edit the flow with the UI 
-```plaintext
-on a web browser -> http://192.168.0.200:1880/
-```
-
-_It is also possible to create your own flow and import it with git. Then you can launch your own flow_
-
-
-# create a node :
-
-all custom neuds should be made in a separate folder (to know more about how to create a node: [first node](https://nodered.org/docs/creating-nodes/first-node)).
-
-To implement the custom node in the node-red palette: 
+starting node red with your own flow from github
 ```bash
-$ npm install industry/path/to/your/node/folder 
+$ cd /node-red
+$ node red.js industry/path/to/your/flow.json
 ```
+[more command option](https://nodered.org/docs/getting-started/local#command-line-usage)
+
