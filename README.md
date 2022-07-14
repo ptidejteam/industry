@@ -19,11 +19,11 @@ $ node red.js ../industry/path/to/your/folder
 
 
 ### Basic folder structure: 
-* MyFolder
-* * flows.json
-* * package.json
-* * nodes
-* * * name_of_your_node.js
-* * * name_of_your_node.html
+MyFolder/
+* flows.json
+* package.json
+* nodes/
+* * name_of_your_node.js
+* * name_of_your_node.html
 
-After init/adding/updating things use ```$ npm install`` inside the current folder
+After init/adding/updating things use `$ npm install` inside the current folder
