@@ -744,8 +744,8 @@ class Broker:
         header = re.match('^\[(.+)]',topic)
         if header:
             header = header.group(1) # get [header(a,b)] from [header(a,b)]topic/subtopic
-            broadcast['topic'] = topic.replace(f'[{header}]','')
-        
+            broadcast['topic'] = topic.replace('['+header+']','')
+    
             print("Header : "+header + " | Topic : "+broadcast['topic'])
         ###
 
