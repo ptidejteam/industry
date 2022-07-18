@@ -1,2 +1,5 @@
 smartBroker/__pycache__/
 smartBroker/filterClass/__pycache__/
+ExpressNodeRed/db.json
+ExpressNodeRed/node_modules
+ExpressNodeRed/package-lock.json

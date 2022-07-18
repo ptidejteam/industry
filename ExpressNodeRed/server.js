@@ -1,9 +1,14 @@
+// Initialize the database
+const JSONdb = require('simple-json-db');
+const db = new JSONdb('./db.json');
+
+// Initialize the Express server
 var http = require('http');
 var express = require("express");
+const bodyParser = require('body-parser');
 var RED = require("node-red");
 
 var request = require('request');
-
 var app = express();
 var server = http.createServer(app);
 
@@ -28,6 +33,14 @@ app.use(settings.httpAdminRoot,RED.httpAdmin);
 
 // Serve the http nodes UI from /api
 app.use(settings.httpNodeRoot,RED.httpNode);
+
+// Body parser middleware
+app.use(bodyParser.json({ extended: true }));
+
+// Pug template engine init for Demo page
+const path = require("path");
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
 
 
 function prmsRequest(url){
@@ -54,6 +67,82 @@ app.get('/test',async(req,res)=>{
         console.log(e);
     }
     res.send("Hello");
+});
+
+app.get('/',async(req,res)=>{
+  var resp = ""
+  console.log('server-test')
+  res.send("Server OK");
+});
+
+let lastFitbitData = "";
+
+
+app.post('/fitbit',async(req,res)=>{
+  let data = {};
+  if (db.has("fitbit-" + lastFitbitData)){
+    data = db.get("fitbit-" + lastFitbitData);
+  } else {
+    data = {
+      status: "",
+      location: {
+        latitude: "",
+        longitude: ""
+      },
+      presence: "",
+      acceleration: {
+        x: "",
+        y: "",
+        z: ""
+      },
+      lastSyncTime: "",
+      heartRate: "",
+      batteryLevel: "",
+      charge: ""
+    };
+  }
+ 
+  let input = req.body;
+
+  if (input.hasOwnProperty("status")) {
+    data.status = input.status;
+  } else if (input.hasOwnProperty("location")) {
+    data.location.latitude = input.location.latitude;
+    data.location.longitude = input.location.longitude;
+  } else if (input.hasOwnProperty("presence")) {
+    data.presence = input.presence;
+  } else if (input.hasOwnProperty("acceleration")) {
+    data.acceleration.x = input.acceleration.x;
+    data.acceleration.y = input.acceleration.y;
+    data.acceleration.z = input.acceleration.z;
+  } else if (input.hasOwnProperty("lastSyncTime")) {
+    data.lastSyncTime = input.lastSyncTime;
+  } else if (input.hasOwnProperty("heartRate")) {
+    data.heartRate = input.heartRate;
+  } else if (input.hasOwnProperty("batteryLevel")) {
+    data.batteryLevel = input.batteryLevel;
+  } else if (input.hasOwnProperty("charge")) {
+    data.charge = input.charge;
+  }
+
+  lastFitbitData = new Date().getTime();
+  data.timestamp = lastFitbitData;
+  console.log(data);
+  db.set("fitbit-" + data.timestamp,data);
+  res.status(200).send("Data received - Current profile : " + JSON.stringify(data));
+});
+
+app.get("/demo",async(req,res)=>{
+  let data = {};
+  console.log(lastFitbitData);
+  if (db.has("fitbit-" + lastFitbitData)){
+    data = db.get("fitbit-" + lastFitbitData);
+  } else {
+    data = {
+      error: "No data found"
+    }
+  }
+  res.render(__dirname + "/demo/demo", { info: JSON.stringify(data, null, 2) });
 });
 
 
