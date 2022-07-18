@@ -10,9 +10,6 @@ var RED = require("node-red");
 
 var request = require('request');
 
-let bodyParser = require('body-parser');
-
-
 var app = express();
 var server = http.createServer(app);
 
@@ -134,6 +131,12 @@ app.post('/fitbit',async(req,res)=>{
   console.log(data);
   db.set("fitbit-" + data.timestamp,data);
   res.status(200).send("Data received - Current profile : " + JSON.stringify(data));
+
+  request.post('http://192.168.0.200:1880/api/fit', {json: data}, function(err, httpResponse, body) {
+    if (!err && httpResponse.statusCode == 200) {
+      console.log(body);
+    }
+  });
 });
 
 app.get("/demo",async(req,res)=>{
@@ -148,6 +151,7 @@ app.get("/demo",async(req,res)=>{
   }
   res.render(__dirname + "/demo/demo", { info: JSON.stringify(data, null, 2) });
 });
+
 
 
 server.listen(8000);
