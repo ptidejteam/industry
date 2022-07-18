@@ -746,11 +746,11 @@ class Broker:
             header = header.group(1) # get [header(a,b)] from [header(a,b)]topic/subtopic
             broadcast['topic'] = topic.replace('['+header+']','')
     
-            print("Header : "+header + " | Topic : "+broadcast['topic'])
+            print("Header : "+header + " | Topic : "+ broadcast['topic'])
         ###
 
         if broadcast['topic'][0] != '$':
-            print(broadcast['topic'] + " : " + broadcast['data']) 
+            print(broadcast['topic'] + " : " + str(broadcast['data'])) 
         if header == None: #no header
             yield from self._broadcast_queue.put(broadcast)
         else:

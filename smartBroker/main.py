@@ -8,7 +8,7 @@ config = {
     'listeners': {
         'default':{
             'type': 'tcp',
-            'bind': '192.168.0.127:1883' 
+            'bind': '192.168.0.200:2222' 
         }
     },
     'sys_interval': 30,
