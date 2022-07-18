@@ -4,11 +4,14 @@ var RED = require("node-red");
 
 var request = require('request');
 
+let bodyParser = require('body-parser');
+
+
 var app = express();
 var server = http.createServer(app);
 
+app.use(bodyParser());
 const args = process.argv;
-console.log(args)
 userdir = args[2];
 
 // Create the settings object - see default settings.js file for other options
@@ -29,7 +32,6 @@ app.use(settings.httpAdminRoot,RED.httpAdmin);
 // Serve the http nodes UI from /api
 app.use(settings.httpNodeRoot,RED.httpNode);
 
-
 function prmsRequest(url){
     return new Promise(function (resolve, reject) {
         request(url, function (error, res, body) {
@@ -43,17 +45,18 @@ function prmsRequest(url){
     })
 }
 
-app.get('/test',async(req,res)=>{
-    var resp = ""
-    console.log('test')
-    try{
-        resp = await prmsRequest('http://192.168.0.200:8000/api/test');
-        console.log(resp)
-    }
-    catch (e){
-        console.log(e);
-    }
-    res.send("Hello");
+
+
+
+app.get('/fit',async(req,res)=>{
+  var resp = ""
+  try{
+      resp = await prmsRequest('http://localhost:8000/api/fit');
+  }
+  catch (e){
+      console.log(e);
+  }
+  res.send(JSON.parse(resp).value);
 });
 
 
