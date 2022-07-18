@@ -750,7 +750,7 @@ class Broker:
         ###
 
         if broadcast['topic'][0] != '$':
-            print(broadcast['topic'] + " : " {broadcast['data']}") 
+            print(broadcast['topic'] + " : " + broadcast['data']) 
         if header == None: #no header
             yield from self._broadcast_queue.put(broadcast)
         else:
