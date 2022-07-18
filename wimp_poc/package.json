@@ -1,0 +1,11 @@
+{
+  "name": "wimppoc",
+  "version": "1.0.0",
+  "description": "",
+  "node-red": {
+    "nodes": {
+    }
+  },
+  "dependencies": {
+  }
+}

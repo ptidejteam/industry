@@ -15,6 +15,13 @@ starting node red with your own flow from github
 $ cd /node-red
 $ node red.js ../industry/path/to/your/folder
 ```
+
+starting node red with express server with your own flow from github
+```
+$ cd ExpressNodeRed
+$ node server.js /your/folder/like/template
+```
+__192.168.0.200/red for the ui__
 [more command option](https://nodered.org/docs/getting-started/local#command-line-usage)
 
 

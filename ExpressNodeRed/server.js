@@ -9,11 +9,14 @@ const bodyParser = require('body-parser');
 var RED = require("node-red");
 
 var request = require('request');
+
+let bodyParser = require('body-parser');
+
+
 var app = express();
 var server = http.createServer(app);
 
 const args = process.argv;
-console.log(args)
 userdir = args[2];
 
 // Create the settings object - see default settings.js file for other options
@@ -56,17 +59,18 @@ function prmsRequest(url){
     })
 }
 
-app.get('/test',async(req,res)=>{
-    var resp = ""
-    console.log('test')
-    try{
-        resp = await prmsRequest('http://192.168.0.200:8000/api/test');
-        console.log(resp)
-    }
-    catch (e){
-        console.log(e);
-    }
-    res.send("Hello");
+
+
+
+app.get('/fit',async(req,res)=>{
+  var resp = ""
+  try{
+      resp = await prmsRequest('http://localhost:8000/api/fit');
+  }
+  catch (e){
+      console.log(e);
+  }
+  res.send(resp);
 });
 
 app.get('/',async(req,res)=>{
