@@ -136,7 +136,7 @@ app.post('/fitbit',async(req,res)=>{
       console.log(body);
     }
   });
-  res.status(200).send(data);
+  res.status(200).send({"received": "true"});
 });
 
 app.get("/demo",async(req,res)=>{
