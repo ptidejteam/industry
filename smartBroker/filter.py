@@ -11,7 +11,7 @@ class Action:
         self.full_type = type
         res = re.search('^([a-zA-Z0-9_]+)\(?([a-zA-Z0-9,;\"\'\[\]]*)\)?$',type)
         if res == None or len(res.groups()) != 2:
-            print(f"{ERR}error during parsing action cannot find action of type => action_exemple(arg1,arg2...)")
+            print(ERR + "error during parsing action cannot find action of type => action_exemple(arg1,arg2...)")
             raise
         self.type = res.group(1)
         args = res.group(2).split(";") if res.group(2) != '' else []
@@ -22,12 +22,12 @@ class Action:
             raise
         
         if not self.type in index:
-            print(f"{ERR}error, the action '{self.type}' doesn't exist")
+            print(ERR +"error, the action " + self.type +" doesn't exist")
             raise
         try:
             self.action = index[self.type](self.args)
         except:
-            print(f"{ERR}error during instanciation of the action")
+            print(ERR + "error during instanciation of the action")
             raise
 
     
@@ -42,7 +42,7 @@ class Filter:
         topic = broadcast['topic']
         if header == 'delete':
             if self.topics.pop(topic,None) == None:
-                print(f"{ERR}Topic {topic} cannot be delete because it doesn't exist")
+                print(ERR + "Topic " + topic +" cannot be delete because it doesn't exist")
             return None
         
         if (not topic in self.topics) or self.topics[topic].full_type != header: # not action or action change for this topic
@@ -50,7 +50,7 @@ class Filter:
             try:
                 self.topics[topic] = Action(header)
             except:
-                print(f"{ERR}error during creation/change action for topic {topic}")
+                print(ERR + "error during creation/change action for topic " +topic)
                 return None
         return self.topics[topic].action.get(broadcast)
 
