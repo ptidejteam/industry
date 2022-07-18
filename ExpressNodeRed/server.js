@@ -56,7 +56,7 @@ app.get('/fit',async(req,res)=>{
   catch (e){
       console.log(e);
   }
-  res.send(JSON.parse(resp).value);
+  res.send(resp);
 });
 
 
