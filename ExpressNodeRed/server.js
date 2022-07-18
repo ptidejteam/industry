@@ -130,13 +130,13 @@ app.post('/fitbit',async(req,res)=>{
   data.timestamp = lastFitbitData;
   console.log(data);
   db.set("fitbit-" + data.timestamp,data);
-  res.status(200).send("Data received - Current profile : " + JSON.stringify(data));
 
   request.post('http://192.168.0.200:8000/api/fit', {json: data}, function(err, httpResponse, body) {
     if (!err && httpResponse.statusCode == 200) {
       console.log(body);
     }
   });
+  res.status(200).send(data);
 });
 
 app.get("/demo",async(req,res)=>{
