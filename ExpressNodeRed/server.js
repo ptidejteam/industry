@@ -136,7 +136,7 @@ app.post('/fitbit',async(req,res)=>{
       console.log(body);
     }
   });
-  res.status(200);
+  res.status(200).send(data);
 });
 
 app.get("/demo",async(req,res)=>{
