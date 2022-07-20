@@ -40,6 +40,35 @@
         "out": []
     },
     {
+        "id": "164809fc5ff45477",
+        "type": "subflow",
+        "name": "Subflow 2",
+        "info": "",
+        "in": [
+            {
+                "x": 0,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "21c35318e86fd136"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 860,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "aeaff6f2d37ba0dd",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "id": "91dd09cbaf5ef4b1",
         "type": "json-db-collection",
         "name": "Fitbit Data",
@@ -436,6 +465,61 @@
         "wires": [
             [
                 "7e47bc4b2983c043"
+            ]
+        ]
+    },
+    {
+        "id": "21c35318e86fd136",
+        "type": "db",
+        "z": "164809fc5ff45477",
+        "name": "Get Last Fitbit Input Date",
+        "method": "get",
+        "key": "lastFitbitInputDate",
+        "keytype": "str",
+        "data": "value",
+        "datatype": "msg",
+        "file": "db.json",
+        "x": 190,
+        "y": 80,
+        "wires": [
+            [
+                "5ae44c60f868e6ad"
+            ]
+        ]
+    },
+    {
+        "id": "aeaff6f2d37ba0dd",
+        "type": "db",
+        "z": "164809fc5ff45477",
+        "name": "Get Last Fitbit Input Data",
+        "method": "get",
+        "key": "payload.key",
+        "keytype": "msg",
+        "data": "value",
+        "datatype": "msg",
+        "file": "db.json",
+        "x": 670,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5ae44c60f868e6ad",
+        "type": "function",
+        "z": "164809fc5ff45477",
+        "name": "Build db key",
+        "func": "msg.payload.key = \"fitbit-\" + msg.payload.data;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 80,
+        "wires": [
+            [
+                "aeaff6f2d37ba0dd"
             ]
         ]
     },
@@ -1109,11 +1193,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 660,
-        "y": 240,
+        "x": 480,
+        "y": 260,
         "wires": [
             [
-                "21c35318e86fd136"
+                "e80fd60eb55be605"
             ]
         ]
     },
@@ -1129,67 +1213,10 @@
         "template": "{\n    \"wemo\": {{payload.state}},\n    \"fibit-presence\": {{payload.data.presence}}\n}",
         "output": "json",
         "x": 400,
-        "y": 400,
+        "y": 420,
         "wires": [
             [
                 "2e5cb422354fcf62"
-            ]
-        ]
-    },
-    {
-        "id": "21c35318e86fd136",
-        "type": "db",
-        "z": "421506f464550bd2",
-        "name": "Get Last Fitbit Input Date",
-        "method": "get",
-        "key": "lastFitbitInputDate",
-        "keytype": "str",
-        "data": "value",
-        "datatype": "msg",
-        "file": "db.json",
-        "x": 450,
-        "y": 320,
-        "wires": [
-            [
-                "5ae44c60f868e6ad"
-            ]
-        ]
-    },
-    {
-        "id": "aeaff6f2d37ba0dd",
-        "type": "db",
-        "z": "421506f464550bd2",
-        "name": "Get Last Fitbit Input Data",
-        "method": "get",
-        "key": "payload.key",
-        "keytype": "msg",
-        "data": "value",
-        "datatype": "msg",
-        "file": "db.json",
-        "x": 930,
-        "y": 320,
-        "wires": [
-            [
-                "2f1855a4d87631a0"
-            ]
-        ]
-    },
-    {
-        "id": "5ae44c60f868e6ad",
-        "type": "function",
-        "z": "421506f464550bd2",
-        "name": "Build db key",
-        "func": "msg.payload.key = \"fitbit-\" + msg.payload.data;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 690,
-        "y": 320,
-        "wires": [
-            [
-                "aeaff6f2d37ba0dd"
             ]
         ]
     },
@@ -1249,7 +1276,7 @@
         "datatype": "msg",
         "file": "db.json",
         "x": 620,
-        "y": 460,
+        "y": 500,
         "wires": [
             [
                 "b1bd4cb62b13a67a"
@@ -1269,7 +1296,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 850,
-        "y": 460,
+        "y": 500,
         "wires": []
     },
     {
@@ -1284,7 +1311,7 @@
         "finalize": "",
         "libs": [],
         "x": 400,
-        "y": 460,
+        "y": 500,
         "wires": [
             [
                 "fe9b9cecebc87349"
@@ -1358,5 +1385,18 @@
         "x": 220,
         "y": 580,
         "wires": []
+    },
+    {
+        "id": "e80fd60eb55be605",
+        "type": "subflow:164809fc5ff45477",
+        "z": "421506f464550bd2",
+        "name": "Get Fitbit Profile",
+        "x": 420,
+        "y": 340,
+        "wires": [
+            [
+                "2f1855a4d87631a0"
+            ]
+        ]
     }
 ]
