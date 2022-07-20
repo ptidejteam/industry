@@ -8,7 +8,7 @@ module.exports = function(RED){
         node.on('input', function(msg) {
             try {
                 const method = config.method || "set";
-                const key = config.key || msg.payload.key;
+                let key = config.key || msg.payload.key;
                 const keytype = config.keytype;
                 let data = config.data || msg.payload.data;
                 const datatype = config.datatype;
@@ -19,12 +19,18 @@ module.exports = function(RED){
                 }
 
                 var json_db = new simple_json_db(`${__dirname}/database/${file}`);
+
+                if (keytype == "msg") {
+                    key = eval("msg." + (key));
+                }
                 
                 msg.payload.method = method;
                 switch (method) {
                     case "set":
                         if (datatype == "json") {
                             data = JSON.parse(data)
+                        } else if (datatype == "msg") {
+                            data = eval("msg." + (data));
                         }
                         msg.payload.data = json_db.set(key, data);
                         break;

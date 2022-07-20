@@ -1,0 +1,13 @@
+{
+    "name": "json_database",
+    "version": "1.0.0",
+    "description": "Node to communication with a JSON Database (.json file).",
+    "node-red": {
+        "nodes": {
+        "db": "db.js"
+        }
+    },
+    "dependencies": {
+        "simple-json-db": "^2.0.0"
+    }
+}
