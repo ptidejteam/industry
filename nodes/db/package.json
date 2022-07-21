@@ -1,5 +1,5 @@
 {
-    "name": "json_database",
+    "name": "json-database",
     "version": "1.0.0",
     "description": "Node to communication with a JSON Database (.json file).",
     "node-red": {

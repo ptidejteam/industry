@@ -1,0 +1,12 @@
+{
+  "name": "flows",
+  "version": "1.0.0",
+  "description": "",
+  "node-red": {
+    "nodes": {}
+  },
+  "dependencies": {
+    "json-database": "file:../nodes/db",
+    "node-red-node-wemo": "file:../nodes/wemo"
+  }
+}
