@@ -7,7 +7,7 @@ module.exports = function(RED){
 
         node.on('input', function(msg) {
             try {
-                const method = config.method || "set";
+                const method = config.method || "get";
                 let key = config.key || msg.payload.key;
                 const keytype = config.keytype;
                 let data = config.data || msg.payload.data;
@@ -42,6 +42,9 @@ module.exports = function(RED){
                         break;
                     case "delete":
                         msg.payload.data = json_db.delete(key);
+                        break;
+                    case "json":
+                        msg.payload.data = json_db.JSON();
                         break;
                 }
                 

@@ -34,12 +34,27 @@
 
 
             $("#node-input-method").change(function() {
-                if ($(this).val() == "set") {
-                    $("#data").show();
+
+                switch ($(this).val()){
+                    case "set":
+                        $("#data").show();
+                        $("#key").show();
+                        break;
+                        
+                    case "get":
+                    case "has":
+                    case "delete":
+                        $("#data").hide();
+                        $("#key").show();
+                        break;
+                    case "json":
+                        $("#data").hide();
+                        $("#key").show();
+                        break;
                 }
-                else {
-                    $("#data").hide();
-                }
+
+
+                
             });
 
         }
@@ -64,12 +79,13 @@
         <option value="get">get</option>
         <option value="has">has</option>
         <option value="delete">delete</option>
+        <option value="json">JSON</option>
         <option value="use" data-i18n="httpin.setby"></option>
         </select>
     </div>
 
     <div class="form-row">
-        <label for="node-input-key"><i class="fa fa-key"></i> Key</label>
+        <label for="node-input-key hide"><i class="fa fa-key"></i> Key</label>
         <input type="text" id="node-input-key" placeholder="payload.key">
         <input type="hidden" id="node-input-keytype">
     </div>
