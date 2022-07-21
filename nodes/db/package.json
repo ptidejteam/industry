@@ -4,7 +4,7 @@
     "description": "Node to communication with a JSON Database (.json file).",
     "node-red": {
         "nodes": {
-        "db": "db.js"
+            "db": "db.js"
         }
     },
     "dependencies": {
