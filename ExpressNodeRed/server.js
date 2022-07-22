@@ -56,11 +56,22 @@ function prmsRequest(url){
     })
 }
 
+app.get('/states',async(req,res)=>{
+  var resp = ""
+  try{
+      var resp_str = await prmsRequest('http://localhost:8000/api/states');
+      resp = JSON.parse(resp_str).data;
+  }
+  catch (e){
+      console.log(e);
+  }
+  res.send(resp);
+});
+
 app.get('/fitbit',async(req,res)=>{
   var resp = ""
   try{
-      let resp_str = await prmsRequest('http://192.168.0.200:8000/api/states');
-      let resp = JSON.parse(resp_str.data);
+      resp = await prmsRequest('http://localhost:8000/api/fitbit');
   }
   catch (e){
       console.log(e);
