@@ -20,7 +20,7 @@ userdir = args[2];
 var settings = {
     httpAdminRoot:"/red",
     httpNodeRoot: "/api",
-    userDir:"../"+userdir,
+    userDir:__dirname+userdir,
     flowFile:'flows.json',
     functionGlobalContext: { }    // enables global context
 };
@@ -59,7 +59,8 @@ function prmsRequest(url){
 app.get('/fitbit',async(req,res)=>{
   var resp = ""
   try{
-      resp = await prmsRequest('http://localhost:8000/api/fitbit');
+      let resp_str = await prmsRequest('http://192.168.0.200:8000/api/states');
+      let resp = JSON.parse(resp_str.data);
   }
   catch (e){
       console.log(e);
