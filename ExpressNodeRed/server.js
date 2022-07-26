@@ -1,13 +1,16 @@
 // Initialize the database
 const JSONdb = require('simple-json-db');
 const db = new JSONdb('./db.json');
-
+const db_auth = new JSONdb('./db_pwd.json');
 // Initialize the Express server
 var http = require('http');
 var express = require("express");
 const bodyParser = require('body-parser');
 var RED = require("node-red");
 
+const passport = require('passport')
+const session = require('express-session')
+const LocalStrategy = require('passport-local').Strategy
 var request = require('request');
 
 var app = express();
@@ -16,28 +19,78 @@ var server = http.createServer(app);
 const args = process.argv;
 userdir = args[2];
 
-// Create the settings object - see default settings.js file for other options
+
+
+
+
+
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+
+// passport
+app.use(session({
+  secret: "secret",
+  resave: false ,
+  saveUninitialized: true 
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(
+  (username, password, done) => {
+      let reel_password = db_auth.get(username);
+      console.log("rpwd = " + reel_password);
+      if (reel_password != password){
+        console.log('failes auth')
+        return done(null, false);
+      } 
+      else{
+        console.log('auth ok')
+        let authenticated_user = { "id": username};
+        return done (null, authenticated_user);
+      }  
+  },
+));
+
+passport.serializeUser( (userObj, done) => {console.log("oooo");done(null, userObj)});
+passport.deserializeUser((userObj, done) => {
+  console.log('desere');
+  done (null, userObj )});
+
+
+
+checkAuthenticated = (req, res, next) => {
+  console.log("auth...")
+  if (req.isAuthenticated()) { return next() }
+  res.redirect("/login")
+}
+
+
+
+// NODE RED
 var settings = {
-    httpAdminRoot:"/red",
-    httpNodeRoot: "/api",
-    userDir:__dirname+userdir,
-    flowFile:'flows.json',
-    functionGlobalContext: { }    // enables global context
+  httpAdminRoot:"/red",
+  httpNodeRoot: "/#/api",
+  userDir: __dirname + "/../flows",
+  flowFile:'flows.json',
+  functionGlobalContext: { }    // enables global context
 };
 
-// Initialise the runtime with a server and settings
 RED.init(server,settings);
+//app.use(settings.httpNodeRoot,RED.httpNode);
+app.use("/red",checkAuthenticated,RED.httpAdmin);
 
-// Serve the editor UI from /red
-app.use(settings.httpAdminRoot,RED.httpAdmin);
 
-// Serve the http nodes UI from /api
-app.use(settings.httpNodeRoot,RED.httpNode);
 
-// Body parser middleware
-app.use(bodyParser.json({ extended: true }));
+
+
+
 
 // Pug template engine init for Demo page
+
+
 const path = require("path");
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
@@ -56,7 +109,38 @@ function prmsRequest(url){
     })
 }
 
-app.get('/states',async(req,res)=>{
+
+
+
+
+/****tempalte */
+app.get('/profile/:id',checkAuthenticated,
+(req,res,next)=>{
+  if(req.params.id === req.user.id){ //the id in the url ==== the id of the session
+    res.send('error');
+  }
+  return next();
+},
+(req,res)=>{
+  res.sendFile("profile.html");
+});
+
+
+app.get('/login', async(req,res)=>{
+  res.sendFile(__dirname + 'login.html');
+})
+/*****/
+
+app.post('/login',
+  passport.authenticate('local', { failureRedirect: '/login', failureMessage: true }),
+  function(req, res) {
+    res.redirect('/profile'+req.user.id);
+  });
+
+
+
+/*     server as API     */
+app.get('/api/states',async(req,res)=>{
   var resp = ""
   try{
       var resp_str = await prmsRequest('http://localhost:8000/api/states');
@@ -80,9 +164,7 @@ app.get('/fitbit',async(req,res)=>{
 });
 
 app.get('/',async(req,res)=>{
-  var resp = ""
-  console.log('server-test')
-  res.send("Server OK");
+  res.send("/");
 });
 
 server.listen(8000);
