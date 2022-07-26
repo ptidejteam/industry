@@ -7,8 +7,11 @@ var http = require('http');
 var express = require("express");
 const bodyParser = require('body-parser');
 var RED = require("node-red");
+const fs = require('fs');
+const queryString = require('query-string');
 
-var request = require('request');
+const nodeRedRouter = require('./modules/nodeRedRouter');
+const authRouter = require('./modules/authRouter');
 
 var app = express();
 var server = http.createServer(app);
@@ -35,7 +38,8 @@ app.use(settings.httpAdminRoot,RED.httpAdmin);
 app.use(settings.httpNodeRoot,RED.httpNode);
 
 // Body parser middleware
-app.use(bodyParser.json({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Pug template engine init for Demo page
 const path = require("path");
@@ -43,28 +47,30 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 
-function prmsRequest(url){
-    return new Promise(function (resolve, reject) {
-        request(url, function (error, res, body) {
-          if (res.statusCode == 200) {
-            resolve(body);
-          } else {
-            console.log('wrongStatus :' + res.statusCode )
-            reject(error);
-          }
-        });
-    })
-}
 
-app.get('/fitbit',async(req,res)=>{
-  var resp = ""
-  try{
-      resp = await prmsRequest('http://localhost:8000/api/fitbit');
+
+app.use('/node-red', nodeRedRouter);
+app.use('/auth', authRouter);
+
+
+app.get('/myflow',async(req,res)=>{
+  const params = queryString.parse(req.url.split('?')[1]);
+  const id = params["id"];
+  try {
+    const rawFlows = fs.readFileSync(__dirname + '/../flows/flows.json');
+    const flows = JSON.parse(rawFlows);
+    const flow = flows.filter(it => it.name === id)
+    const type = flow[0].type;
+    const flowId = type.split(":")[1];
+    res.json({id: flowId}).status(200);
   }
-  catch (e){
-      console.log(e);
+  catch (e) {
+    res.status(404).send(e);
   }
-  res.send(resp);
+
+  return res;
+
+  
 });
 
 app.get('/',async(req,res)=>{
