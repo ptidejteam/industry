@@ -1,0 +1,25 @@
+{
+    "1": {
+        "id": "1",
+        "pp": "1.jpg",
+        "firstName": "Leonard Leakey",
+        "lastName": "Hofstadter",
+        "building": "ER",
+        "office": "1186",
+        "department": "Info",
+        "states": {
+            "0": {
+                "msg": "not available",
+                "color": "red"
+            },
+            "1": {
+                "msg": "in his office but busy",
+                "color": "orange"
+            },
+            "2": {
+                "msg": "available",
+                "color": "green"
+            }
+        }
+    }
+}

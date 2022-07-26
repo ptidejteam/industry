@@ -1,0 +1,41 @@
+#error button{
+  margin-top: 30px;
+  margin-bottom: 5px;
+}
+
+#error header button{
+  margin-top: 0px;
+}
+
+.arrow-size {
+  font-size: medium;
+}
+
+.error {
+  font-size: 7em;
+  overflow: hidden;
+  padding-top: 10px 0;
+  margin: 10px 0;
+}
+
+.error-content p {
+  font-size: 1.4em;
+  margin-top: 0;
+}
+
+.error-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 75vh;
+    width: 100vw;
+}
+
+  
+.error-content h1{
+  color: var(--main);
+  font-size: 400px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+}

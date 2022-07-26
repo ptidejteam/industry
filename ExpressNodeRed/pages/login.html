@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Personal includes -->
+    <link rel="stylesheet" type="text/css" href="/login/login.css">
+    <link rel="stylesheet" type="text/css" href="/index.css">
+
+    <script src="/login/login.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet"> 
+    
+    <!-- Alertify : library for alerts -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <title>WIMP</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/logo.svg">
+</head>
+
+<body>
+    <div class="credentials-form">
+        <img class="logo" src="/logo.svg">
+        <h1 class="title">WIMP</h1> 
+        <form method="post" id="login-form">
+            <div class="credential">
+                <p class="credential-title">Username :</p>
+                <input name="username" type="text" placeholder="Username" class="credential-input ov">
+            </div>
+            <div class="credential">
+                <p class="credential-title">Password :</p>
+                <input name="password" type="password" placeholder="Password" class="credential-input ov">    
+            </div>
+            <input type="submit" value="Login" class="credential-submit">
+            <div class="redirect">
+                <p class="link">Forgot password ?</p>
+                <p class="link">Sign-up</p>
+            </div>
+        </form>
+    </div>
+    <footer>
+        <h3 class="footer-text">&copy; 2022 wimp</h3>
+    </footer>
+</body>
+
+</html>

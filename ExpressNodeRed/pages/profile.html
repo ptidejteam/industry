@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="/profile/profile.css">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/profile/profile.js"></script>
+    <script src="https://unpkg.com/mustache@latest"></script>
+
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+
+    
+    <!-- 
+        RTL version
+    -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.rtl.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.rtl.min.css"/>
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.rtl.min.css"/>
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.rtl.min.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet"> 
+    <title>WIMP</title>
+
+    <!-- Fontawsome -->
+    <script src="https://kit.fontawesome.com/182b62724d.js" crossorigin="anonymous"></script>
+</head>
+
+    
+<body id="profile">
+    <header>
+        <img src="/logo.svg">
+        <h1>wimp</h1>
+        <button id="return-btn" class="pntr"><i class="fa-solid fa-arrow-left arrow-size"></i></button>
+    </header>
+    <section id="main">
+        <article>
+            <img src="/api/{{pp}}" alt="">
+            <h1>{{name}}</h1>
+            <h3>{{id}}</h3>
+        </article>
+    
+        <main id="main">
+            <h2>States :</h2>
+            <div id="states">
+                {{#states}}
+                <div id="state-{{id}}" class="state">
+                    <h1>{{id}}</h1>
+                    <div>
+                        <p>Message :</p>
+                        <input id="state-msg-{{id}}" type="text" value="{{msg}}" maxlength = "25">
+                    </div>
+                    
+                    <div>
+                        <p>Color :</p>
+                        <select id="color-selector-{{id}}" init="{{color}}">
+                            <option value="green">green</option>
+                            <option value="orange">orange</option>
+                            <option value="red">red</option>
+                        </select>
+                    </div>
+                    <p id="preview-{{id}}" class="status {{color}}" style="margin-left: 10px;">{{msg}}</p>
+                </div>
+                {{/states}}
+            </div>
+
+        </main>
+        <div class="states-control">
+            <button class="pntr" id="add-state">+ State</button>
+            <button class="pntr" id="save-states">Save</button>
+        </div>
+        
+        <button class="pntr" id="my-flow">My flow</button>
+        
+    </section>
+    <footer>
+        <h3>&copy; 2020 wimp</h3>
+    </footer>
+    
+</body>
+</html>

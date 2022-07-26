@@ -1,0 +1,103 @@
+#profile article{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+#profile article img{
+    border-radius: 100px;
+    height: 120px;
+    width: 120px;
+    margin-bottom: 20px;
+}
+
+#profile main{
+    margin-top: 50px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.state {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.state h1{
+    margin-right: 20px;
+}
+
+#profile section{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.state div{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    margin: 0 10px;
+    box-shadow: var(--shadow);
+    background-color: var(--bg);
+    padding: 12px 20px;
+    border-radius: 100px;
+}
+
+.state input{
+    padding: 0;
+    font-size: 14px;
+}
+
+.state div:hover{
+    border: 1px solid var(--main);
+    margin: -1px 9px;
+}
+
+.state p{
+    font-size: 14px;
+    margin-right: 20px;
+}
+
+.state select {
+    border: none;
+    border-radius: 10%;
+}
+
+#profile button{
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+#profile button:disabled{
+    color: grey;
+    border-color: grey;
+}
+
+#profile button:disabled:hover{
+    background-color: transparent;
+    cursor: not-allowed;
+}
+
+#profile header button{
+    margin-top: 0px;
+}
+
+.states-control {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+.states-control > * {
+    margin: 0 25px;
+}
+
+.arrow-size {
+    font-size: medium;
+}
+
+.ajs-ok{
+    color: var(--main) !important;
+}

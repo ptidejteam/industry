@@ -1,0 +1,93 @@
+body{
+    background-color: #F5F5F5;
+    overflow: hidden;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--main);
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.credentials-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 150px;
+}
+
+#login-form {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.credential {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin: 10px 0;
+    text-align: left;
+    width: 100%;
+    height: 100%;
+}
+
+.credential-title {
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.credential-input {
+    width: 100%;
+    background-color: var(--bg);
+    outline: none;
+    border: none;
+    border-radius: 100px;
+    padding: 10px 25px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.credential-submit {
+    color: var(--bg);
+    padding: 8px 35px;
+    transition: background-color 0.2s, color 0.2s;
+    border: 1px solid var(--main);
+    border-radius: 100px;
+    background-color:  var(--main);
+    font-size: 14px;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.credential-submit:hover{
+    color: var(--main);
+    background-color: transparent;
+}
+
+.redirect {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.link {
+    margin: 0 15px;
+    font-size: 14px;
+    color: var(--main);
+}
+
+.link:hover {
+    text-decoration: underline;
+}
