@@ -7,8 +7,21 @@ $(function(){
             const initColor = $(this).attr('init');
             $(this).val(initColor);
         });
+
         counter = $("div[id^=state-]").length;
+
         $("#save-states").attr("disabled", true);
+
+        $('[id^=visibility-').each(function() {
+            const initVisibility = $(this).attr('init');
+            if (initVisibility === 'true') {
+                $(this).attr('checked', true);
+            }
+        });
+    });
+
+    $('[id^=visibility-').on('change', function() {
+        $("#save-states").removeAttr("disabled");
     });
 
     $('#add-state').on("click", function(e){
@@ -28,6 +41,15 @@ $(function(){
                         <option value="orange">orange</option>
                         <option value="red">red</option>
                     </select>
+                </div>
+                <div class="visibility">
+                    <p>Visibility :</p>
+                    <label>Student</label>
+                    <input type="checkbox" id="visibility-student">
+                    <label>Researcher</label>
+                    <input type="checkbox" id="visibility-researcher">
+                    <label>Colleague</label>
+                    <input type="checkbox" id="visibility-colleague">
                 </div>
                 <p id="preview-${counter}" class="status" style="margin-left: 10px;"></p>
             </div>`
@@ -61,7 +83,7 @@ $(function(){
         alertify.confirm("You're going to be redirected on Node-RED interface. Please only edit the tab that corresponds to your profile.", function (e) {
             if (e) {
                 $.ajax({
-                    url: 'http://localhost:3000/red?' + $.param(params),
+                    url: 'http://localhost:8000/red?' + $.param(params),
                     type: 'GET',
                     success: function(data){
                         console.log(data);
@@ -90,15 +112,21 @@ $(function(){
                     && ($('#color-selector-' + id).find(":selected").text() !== "--color--");
             })
             .each(function() {
-            const id = $(this).attr('id').split("-")[1];
-            const msg = $('#state-msg-' + id).val();
-            const color = $('#color-selector-' + id).find(":selected").text();
-            payload.states[id] = {msg, color};
+                const id = $(this).attr('id').split("-")[1];
+                const msg = $('#state-msg-' + id).val();
+                const color = $('#color-selector-' + id).find(":selected").text();
+                const visibility = {
+                    "student": $(this).find('#visibility-student').is(':checked'),
+                    "researcher": $(this).find('#visibility-researcher').is(':checked'),
+                    "colleague": $(this).find('#visibility-colleague').is(':checked')
+                };
+                payload.states[id] = {msg, color, visibility};
+                
         });
 
         e.preventDefault();
         $.ajax({
-            url: 'http://localhost:3000/update-states',
+            url: 'http://localhost:8000/update-states',
             type: 'POST',
             data: JSON.stringify(payload),
             contentType: "application/json; charset=utf-8",
@@ -117,7 +145,7 @@ $(function(){
     $('#logout-btn').on("click", function(e){
         e.preventDefault();
         $.ajax({
-            url: 'http://localhost:3000/auth/logout',
+            url: 'http://localhost:8000/auth/logout',
             type: 'POST',
             data: JSON.stringify(payload),
             contentType: "application/json; charset=utf-8",

@@ -3,7 +3,7 @@
 // Imports for JSON database management
 const JSONdb = require('simple-json-db');
 //const db = new JSONdb('./db.json');
-const db_auth = new JSONdb('./database/db_auth.json');
+const db_auth = new JSONdb('./database/credentials.json');
 const db_staff = new JSONdb('./database/staff.json');
 
 // Imports for Web Server management
@@ -12,11 +12,16 @@ var express = require("express");
 const bodyParser = require('body-parser');
 const queryString = require('query-string');
 var path = require('path');
+
 // Import for Node-RED management
 var RED = require("node-red");
 
 // Import for Mustache management
 const mustacheExpress = require('mustache-express');
+
+// Import dotvenv file
+require('dotenv').config();
+const config = process.env
 
 // Other Imports
 const fs = require('fs');
@@ -72,11 +77,10 @@ passport.use(new LocalStrategy(
 ));
 
 passport.serializeUser( (userObj, done) => {
-  console.log("oooo");done(null, userObj)
+  done(null, userObj)
 });
 
 passport.deserializeUser((userObj, done) => {
-  console.log('desere');
   done (null, userObj )
 });
 
@@ -115,7 +119,7 @@ app.get('/login', async (req,res) => {
 })
 
 app.post('/login',
-  passport.authenticate('local', { failureRedirect: '/login', failureMessage: true }),
+  passport.authenticate('local', { failureMessage: "true" }),
   async (req, res) => {
       res.redirect('/profile/' + req.user.id);
 });
@@ -163,59 +167,46 @@ app.get('/profile/:id', checkAuthenticated,
   }); 
 });
 
-app.get('/dashboard', checkAuthenticated,
-  async (req, res) => {
-  let all_states = await prmsRequest("http://" + config.NODE_RED_EXPRESS + "/states");
-  all_states = JSON.parse(all_states);
-  console.log(all_states)
-  let arrayDB = Object.values(db.JSON());
-  console.log(arrayDB);
-  arrayDB.forEach(e => {
-      
-      //reduce first name
-      if(e.firstName.includes(" ")){
-          fn = e.firstName.split(' ')
-          fn = fn.reduce((a,aa)=>{return (  a + "." + aa[0]) },"");
-          e.firstName = fn.slice(1);
-      }
-      
-      if(all_states[e.id]){
-          state = all_states[e.id];
-          console.log(state)
-          e.st_msg = e.states[state].msg;
-          e.st_color = e.states[state].color;
-      }
-      else{
-          e.status = "undefined";
-          e.state = "";
-      }
-  });
-  console.log(arrayDB);
-  res.render(__dirname + '/pages/home.html', {"articles":arrayDB});
+app.post('/update-states', checkAuthenticated, function(req, res) {
+  console.log("req.user.id = " + req.user.id);
+  const id = req.user.id;
+  const states = req.body.states;
+  if (!db_staff.has(id)) {
+      res.send("No user found").status(404);
+  }
+  else {
+      const user = db_staff.get(id);
+      user.states = states;
+      db_staff.set(id, user);
+      res.send("OK").status(200);
+  }
+  return res;
 });
-
-
-
-/*     server as API     */
 
 app.get('/', checkAuthenticated,
   async(req,res)=>{
-    res.redirect("/login");
+    res.redirect("/profile/" + req.user.id);
 });
 
 app.get('/error/:code',
   async(req,res)=>{
     const code = req.params.code;
-    const message = req.body.msg || "An error has occurred";
-    console.log(code);
-    console.log(message);
+    const message = req.query.msg || "An error has occurred. Please report it to an administrator.";
     res.render(__dirname + '/pages/error.html', {
       "code": code,
       "msg": message
     });
 });
 
-server.listen(8000);
+app.get('*', function(req, res){
+  res.redirect("/error/404?msg=Page not found.");
+});
 
-// Start the runtime
+// Start the server
+console.log('\x1b[33m%s\x1b[0m', "Starting server on port " + config.PORT + "...");
+console.log("");
+server.listen(config.PORT);
+
+// Start the Node-RED runtime
+console.log('\x1b[33m%s\x1b[0m', "Starting Node-RED runtime...");
 RED.start();

@@ -61,7 +61,7 @@
         </article>
     
         <main id="main">
-            <h2>States :</h2>
+            <h2>Your states :</h2>
             <div id="states">
                 {{#states}}
                 <div id="state-{{id}}" class="state">
@@ -78,6 +78,15 @@
                             <option value="orange">orange</option>
                             <option value="red">red</option>
                         </select>
+                    </div>
+                    <div class="visibility">
+                        <p>Visibility :</p>
+                        <label>Student</label>
+                        <input type="checkbox" init="{{visibility.student}}" id="visibility-student">
+                        <label>Researcher</label>
+                        <input type="checkbox" init="{{visibility.researcher}}" id="visibility-researcher" id="researcher">
+                        <label>Colleague</label>
+                        <input type="checkbox" init="{{visibility.colleague}}" id="visibility-colleague" id="colleague">
                     </div>
                     <p id="preview-{{id}}" class="status {{color}}" style="margin-left: 10px;">{{msg}}</p>
                 </div>

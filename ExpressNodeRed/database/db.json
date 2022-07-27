@@ -1,0 +1,146 @@
+{
+    "fitbit-1658147099631": {
+        "status": "started",
+        "location": {
+            "latitude": "",
+            "longitude": ""
+        },
+        "presence": "false",
+        "acceleration": {
+            "x": "",
+            "y": "",
+            "z": ""
+        },
+        "lastSyncTime": "",
+        "heartRate": "",
+        "batteryLevel": "",
+        "charge": "",
+        "timestamp": 1658147143634
+    },
+    "fitbit-1658147125590": {
+        "status": "started",
+        "location": {
+            "latitude": "",
+            "longitude": ""
+        },
+        "presence": "false",
+        "acceleration": {
+            "x": "",
+            "y": "",
+            "z": ""
+        },
+        "lastSyncTime": "",
+        "heartRate": "",
+        "batteryLevel": "",
+        "charge": "",
+        "timestamp": 1658147143634
+    },
+    "fitbit-1658147143634": {
+        "status": "started",
+        "location": {
+            "latitude": "",
+            "longitude": ""
+        },
+        "presence": "false",
+        "acceleration": {
+            "x": "",
+            "y": "",
+            "z": ""
+        },
+        "lastSyncTime": "",
+        "heartRate": "",
+        "batteryLevel": "",
+        "charge": "",
+        "timestamp": 1658147143634
+    },
+    "fitbit-1658147206402": {
+        "status": "",
+        "location": {
+            "latitude": "",
+            "longitude": ""
+        },
+        "presence": "false",
+        "acceleration": {
+            "x": "",
+            "y": "",
+            "z": ""
+        },
+        "lastSyncTime": "",
+        "heartRate": "",
+        "batteryLevel": "",
+        "charge": "",
+        "timestamp": 1658147206402
+    },
+    "fitbit-1658147225566": {
+        "status": "",
+        "location": {
+            "latitude": "",
+            "longitude": ""
+        },
+        "presence": "false",
+        "acceleration": {
+            "x": "",
+            "y": "",
+            "z": ""
+        },
+        "lastSyncTime": "",
+        "heartRate": "",
+        "batteryLevel": "",
+        "charge": "",
+        "timestamp": 1658147225566
+    },
+    "fitbit-1658147687554": {
+        "status": "",
+        "location": {
+            "latitude": "",
+            "longitude": ""
+        },
+        "presence": "false",
+        "acceleration": {
+            "x": "",
+            "y": "",
+            "z": ""
+        },
+        "lastSyncTime": "",
+        "heartRate": "",
+        "batteryLevel": "",
+        "charge": "",
+        "timestamp": 1658147687554
+    },
+    "fitbit-1658148398356": {
+        "status": "",
+        "location": {
+            "latitude": "",
+            "longitude": ""
+        },
+        "presence": "false",
+        "acceleration": {
+            "x": "",
+            "y": "",
+            "z": ""
+        },
+        "lastSyncTime": "",
+        "heartRate": "",
+        "batteryLevel": "",
+        "charge": "",
+        "timestamp": 1658148398356
+    },
+    "fitbit-1658148564628": {
+        "status": "",
+        "location": {
+            "latitude": "",
+            "longitude": ""
+        },
+        "presence": "false",
+        "acceleration": {
+            "x": "",
+            "y": "",
+            "z": ""
+        },
+        "lastSyncTime": "",
+        "heartRate": "",
+        "batteryLevel": "",
+        "charge": "",
+        "timestamp": 1658148564628
+    }
+}

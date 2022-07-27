@@ -12,6 +12,7 @@
 
 #profile main{
     margin-top: 50px;
+    width: 100%;
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -100,4 +101,12 @@
 
 .ajs-ok{
     color: var(--main) !important;
+}
+
+.visibility input {
+    margin: 0 15px 0 10px;
+}
+
+.visibility label {
+    font-size: 14px;
 }

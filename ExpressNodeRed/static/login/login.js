@@ -7,14 +7,10 @@ $(function(){
             type: 'POST',
             data: $('#login-form').serialize(),
             success: function(data){
-                //  alert('successfully submitted')
-                // alertify.set('notifier','position', 'top-right');
-                // alertify.notify('Invalid credentials', 'success', 5, function(){  console.log('dismissed'); });
-                // alertify.error('Error notification message.'); 
                 location.href = "/profile/" + $('#username').val();
             },
             error: function(data){
-                alertify.error(data.statusText + ": " + data.responseText    , 'error', 5); 
+                if (data.status === 401) { alertify.error(data.statusText + ": Invalid credentials", 'error', 5 )};
             }            
         });
     });
