@@ -96,8 +96,6 @@ $(function(){
             payload.states[id] = {msg, color};
         });
 
-        console.log("payload: " + JSON.stringify(payload));
-
         e.preventDefault();
         $.ajax({
             url: 'http://localhost:3000/update-states',
@@ -116,8 +114,22 @@ $(function(){
         location.reload();
     });
 
-    $('#return-btn').on("click", function(e){
+    $('#logout-btn').on("click", function(e){
         e.preventDefault();
-        location.href = "http://localhost:3000/";
+        $.ajax({
+            url: 'http://localhost:3000/auth/logout',
+            type: 'POST',
+            data: JSON.stringify(payload),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data){
+                console.log(data);
+            },
+            error: function(data){
+                console.log(data);
+            }            
+        });
+
+        location.reload();
     });
 });
