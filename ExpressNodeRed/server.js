@@ -3,7 +3,7 @@
 // Imports for JSON database management
 const JSONdb = require('simple-json-db');
 const db = new JSONdb('./db.json');
-const db_staff = new JSONdb('./staff.json');
+const db_staff = new JSONdb('./database/staff.json');
 
 // Imports for Web Server management
 var http = require('http');

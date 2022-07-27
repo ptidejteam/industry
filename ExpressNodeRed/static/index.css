@@ -115,10 +115,11 @@ input{
 
 .ov{
     box-shadow: var(--shadow);
+    border: 1px solid transparent;
 }
 
 .ov:hover{
-    outline: 1px solid var(--main);
+    border: 1px solid var(--main);
 }
 
 main{
