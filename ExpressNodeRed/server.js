@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 var RED = require("node-red");
 
 var request = require('request');
+var axios = require('axios');
 
 var app = express();
 var server = http.createServer(app);
@@ -16,6 +17,7 @@ var server = http.createServer(app);
 const args = process.argv;
 userdir = args[2];
 
+const { logger } = require('./config/Logger')
 // Create the settings object - see default settings.js file for other options
 var settings = {
     httpAdminRoot:"/red",
@@ -66,6 +68,49 @@ app.get('/fitbit',async(req,res)=>{
   }
   res.send(resp);
 });
+
+/**
+ * Saves nest cam indoor camera events
+ */
+app.post('/nest-cam', async(req, res) => {
+  try {
+    
+    axios.post('http://localhost:8000/api/nest-cam-indoor', req.body).then(response => {
+      console.log(response.status);
+      if(response.status === 201){
+        res.json({"message": "Event processed successfully"});
+      } else {
+        logger.error(response)
+        res.status(response.status);
+        res.json({"message": "There was an error, while processing your event", status: response.status});
+      }
+    });
+
+  } catch (err) {
+    logger.error(err);
+  } 
+});
+
+/**
+ * Gets nest cam indoor events data
+ */
+app.get('/nest-cam', async(req, res) => {
+  try {
+    axios.get('http://localhost:8000/api/nest-cam-indoor', {params: req.query}).then(response => {
+      if(response.status === 200){
+        res.json(response.data);
+      } else {
+        logger.error(response)
+        res.status(response.status);
+        res.json({"message": "There was an error, while getting events data", status: response.status});
+      }
+    });
+
+  } catch (err) {
+    logger.error(err);
+  } 
+});
+
 
 app.get('/',async(req,res)=>{
   var resp = ""
