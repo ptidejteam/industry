@@ -23,7 +23,7 @@ const fs = require('fs');
 
 // Import custom modules
 const nodeRedRouter = require('./modules/nodeRedRouter');
-const authRouter = require('./modules/authRouter');
+const apiRouter = require('./modules/apiRouter');
 const prmsRequest = require('./modules/helper');
 
 // -------------------------------
@@ -38,7 +38,7 @@ app.use(bodyParser.json())
 
 // Use custom modules
 app.use('/node-red', nodeRedRouter);
-//app.use('/auth', authRouter);
+app.use('/api', apiRouter);
 
 // Passport config
 const passport = require('passport');
@@ -198,24 +198,9 @@ app.get('/dashboard', checkAuthenticated,
 
 /*     server as API     */
 
-app.get('/api/pp/:pp',async(req,res)=>{
-  res.sendFile(__dirname + "/pp/" + req.params.pp);
-});
-app.get('/api/states',async(req,res)=>{
-  var resp = ""
-  try{
-      var resp_str = await prmsRequest('http://localhost:8000/api/states');
-      resp = JSON.parse(resp_str).data;
-  }
-  catch (e){
-      console.log(e);
-  }
-  res.send(resp);
-});
-
 app.get('/', checkAuthenticated,
   async(req,res)=>{
-    res.redirect("/dashboard");
+    res.redirect("/login");
 });
 
 app.get('/error/:code',
