@@ -2,7 +2,8 @@
 
 // Imports for JSON database management
 const JSONdb = require('simple-json-db');
-const db = new JSONdb('./db.json');
+//const db = new JSONdb('./db.json');
+const db_auth = new JSONdb('./database/db_auth.json');
 const db_staff = new JSONdb('./database/staff.json');
 
 // Imports for Web Server management
@@ -10,7 +11,7 @@ var http = require('http');
 var express = require("express");
 const bodyParser = require('body-parser');
 const queryString = require('query-string');
-
+var path = require('path');
 // Import for Node-RED management
 var RED = require("node-red");
 
@@ -37,7 +38,7 @@ app.use(bodyParser.json())
 
 // Use custom modules
 app.use('/node-red', nodeRedRouter);
-app.use('/auth', authRouter);
+//app.use('/auth', authRouter);
 
 // Passport config
 const passport = require('passport');
@@ -56,6 +57,7 @@ app.use(passport.session());
 passport.use(new LocalStrategy(
   (username, password, done) => {
       let reel_password = db_auth.get(username);
+  
       console.log("rpwd = " + reel_password);
       if (reel_password != password){
           console.log('failes auth')
@@ -81,8 +83,9 @@ passport.deserializeUser((userObj, done) => {
 checkAuthenticated = (req, res, next) => {
   console.log("auth...")
   if (req.isAuthenticated()) { return next() }
-  res.redirect("/auth/login")
+  res.redirect("/login")
 }
+
 
 // Node-RED config
 
@@ -107,6 +110,15 @@ app.set('views', __dirname + '/pages');
 app.use(express.static(__dirname + '/static'));
 
 // API Routes
+app.get('/login', async (req,res) => {
+  res.sendFile(path.resolve('./pages/login.html'));
+})
+
+app.post('/login',
+  passport.authenticate('local', { failureRedirect: '/login', failureMessage: true }),
+  async (req, res) => {
+      res.redirect('/profile/' + req.user.id);
+});
 
 app.get('/myflow', checkAuthenticated, async(req,res)=>{
   const params = queryString.parse(req.url.split('?')[1]);
@@ -128,12 +140,14 @@ app.get('/myflow', checkAuthenticated, async(req,res)=>{
 
 app.get('/profile/:id', checkAuthenticated,
   async (req,res,next)=>{
-    if(req.params.id === req.user.id){ //the id in the url ==== the id of the session
+    if(req.params.id !== req.user.id){ //the id in the url ==== the id of the session
       res
         .send('Action forbidden: You can only access your own profile.')
         .status(403);
     }
-    return next();
+    else{
+      return next();
+    }
   },
   async (req,res)=>{
     var teacher = await db_staff.get(req.params.id);
@@ -180,7 +194,13 @@ app.get('/dashboard', checkAuthenticated,
   res.render(__dirname + '/pages/home.html', {"articles":arrayDB});
 });
 
+
+
 /*     server as API     */
+
+app.get('/api/pp/:pp',async(req,res)=>{
+  res.sendFile(__dirname + "/pp/" + req.params.pp);
+});
 app.get('/api/states',async(req,res)=>{
   var resp = ""
   try{
