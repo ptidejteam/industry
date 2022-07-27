@@ -9,13 +9,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
     "body-parser": "^1.20.0",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "flows": "file:../flows",
+    "install": "^0.13.0",
+    "mongodb": "^4.8.0",
     "node-fetch": "^3.2.6",
     "node-red": "^2.2.2",
+    "node-red-contrib-mongodb4": "^1.4.0",
+    "npm": "^8.15.0",
     "pug": "^3.0.2",
     "request": "^2.88.2",
-    "simple-json-db": "^2.0.0"
+    "simple-json-db": "^2.0.0",
+    "winston": "^3.8.1"
   }
 }
