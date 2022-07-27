@@ -85,8 +85,6 @@ checkAuthenticated = (req, res, next) => {
 }
 
 // Node-RED config
-const args = process.argv;
-userdir = args[2];
 
 var settings = {
   httpAdminRoot:"/red",
