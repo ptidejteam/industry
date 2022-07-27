@@ -91,3 +91,49 @@ body{
 .link:hover {
     text-decoration: underline;
 }
+
+h1 span {
+    margin: 0;
+    transition: all 0.5s cubic-bezier(.41,.14,.79,.9);
+}
+
+h1:hover span:nth-child(1){
+  margin-right: 15px;
+  color: #9d66f3;
+}
+
+h1:hover span:nth-child(2){
+  margin-right: 15px;
+  color: #9d66f3;
+}
+
+h1:hover span:nth-child(3){
+  margin-right: 15px;
+  color: #9d66f3;
+}
+
+h1:hover span:nth-child(1):after{
+  content: "HERE";
+  color: #9d66f3;
+}
+
+h1:hover span:nth-child(2):after{
+  content: "S";
+  color: #9d66f3;
+}
+
+h1:hover span:nth-child(3):after{
+  content: "Y";
+  color: #9d66f3;
+}
+
+h1:hover span:nth-child(4):after{
+  content: "ROFESSOR";
+}
+
+h1:hover .highlight{
+  color: var(--main);
+  text-shadow: 0 0 20px var(--main),
+               0 0 200px var(--main), 
+               0 0 50px var(--main);
+}
