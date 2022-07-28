@@ -37,6 +37,23 @@ const prmsRequest = require('./modules/helper');
 var app = express();
 var server = http.createServer(app);
 
+app.use(function (req, res, next) {
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+  // Pass to next layer of middleware
+  next();    
+});
+
 // Body parser middleware config
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -168,7 +185,6 @@ app.get('/profile/:id', checkAuthenticated,
 });
 
 app.post('/update-states', checkAuthenticated, function(req, res) {
-  console.log("req.user.id = " + req.user.id);
   const id = req.user.id;
   const states = req.body.states;
   if (!db_staff.has(id)) {

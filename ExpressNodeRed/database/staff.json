@@ -6,19 +6,231 @@
         "lastName": "Hofstadter",
         "building": "ER",
         "office": "1186",
-        "department": "Info",
+        "department": "Computer Science",
         "states": {
             "0": {
                 "msg": "not available",
-                "color": "red"
+                "color": "red",
+                "visibility": {
+                    "student": true,
+                    "researcher": true,
+                    "colleague": true
+                }
             },
             "1": {
                 "msg": "in his office but busy",
-                "color": "orange"
+                "color": "orange",
+                "visibility": {
+                    "student": false,
+                    "researcher": true,
+                    "colleague": true
+                }
             },
             "2": {
                 "msg": "available",
-                "color": "green"
+                "color": "orange",
+                "visibility": {
+                    "student": false,
+                    "researcher": true,
+                    "colleague": true
+                }
+            },
+            "3": {
+                "msg": "test",
+                "color": "orange",
+                "visibility": {
+                    "student": false,
+                    "researcher": false,
+                    "colleague": false
+                }
+            }
+        }
+    },
+    "2": {
+        "id": "2",
+        "pp": "1.jpg",
+        "firstName": "Leonard Leakey",
+        "lastName": "Hofstadter",
+        "building": "EV",
+        "office": "1186",
+        "department": "Computer Science",
+        "states": {
+            "0": {
+                "msg": "not available",
+                "color": "red",
+                "visibility": {
+                    "student": true,
+                    "researcher": true,
+                    "colleague": true
+                }
+            },
+            "1": {
+                "msg": "in his office but busy",
+                "color": "orange",
+                "visibility": {
+                    "student": false,
+                    "researcher": true,
+                    "colleague": true
+                }
+            },
+            "2": {
+                "msg": "available",
+                "color": "orange",
+                "visibility": {
+                    "student": false,
+                    "researcher": true,
+                    "colleague": true
+                }
+            },
+            "3": {
+                "msg": "test",
+                "color": "orange",
+                "visibility": {
+                    "student": false,
+                    "researcher": false,
+                    "colleague": false
+                }
+            }
+        }
+    },
+    "3": {
+        "id": "3",
+        "pp": "1.jpg",
+        "firstName": "Leonard Leakey",
+        "lastName": "Hofstadter",
+        "building": "ER",
+        "office": "1186",
+        "department": "Computer Science",
+        "states": {
+            "0": {
+                "msg": "not available",
+                "color": "red",
+                "visibility": {
+                    "student": true,
+                    "researcher": true,
+                    "colleague": true
+                }
+            },
+            "1": {
+                "msg": "in his office but busy",
+                "color": "orange",
+                "visibility": {
+                    "student": false,
+                    "researcher": true,
+                    "colleague": true
+                }
+            },
+            "2": {
+                "msg": "available",
+                "color": "orange",
+                "visibility": {
+                    "student": false,
+                    "researcher": true,
+                    "colleague": true
+                }
+            },
+            "3": {
+                "msg": "test",
+                "color": "orange",
+                "visibility": {
+                    "student": false,
+                    "researcher": false,
+                    "colleague": false
+                }
+            }
+        }
+    },
+    "4": {
+        "id": "1",
+        "pp": "1.jpg",
+        "firstName": "Leonard Leakey",
+        "lastName": "Hofstadter",
+        "building": "ER",
+        "office": "1186",
+        "department": "Computer Science",
+        "states": {
+            "0": {
+                "msg": "not available",
+                "color": "red",
+                "visibility": {
+                    "student": true,
+                    "researcher": true,
+                    "colleague": true
+                }
+            },
+            "1": {
+                "msg": "in his office but busy",
+                "color": "orange",
+                "visibility": {
+                    "student": false,
+                    "researcher": true,
+                    "colleague": true
+                }
+            },
+            "2": {
+                "msg": "available",
+                "color": "orange",
+                "visibility": {
+                    "student": false,
+                    "researcher": true,
+                    "colleague": true
+                }
+            },
+            "3": {
+                "msg": "test",
+                "color": "orange",
+                "visibility": {
+                    "student": false,
+                    "researcher": false,
+                    "colleague": false
+                }
+            }
+        }
+    },
+    "5": {
+        "id": "5",
+        "pp": "1.jpg",
+        "firstName": "Leonard Leakey",
+        "lastName": "Hofstadter",
+        "building": "ER",
+        "office": "1186",
+        "department": "Computer Science",
+        "states": {
+            "0": {
+                "msg": "not available",
+                "color": "red",
+                "visibility": {
+                    "student": true,
+                    "researcher": true,
+                    "colleague": true
+                }
+            },
+            "1": {
+                "msg": "in his office but busy",
+                "color": "orange",
+                "visibility": {
+                    "student": false,
+                    "researcher": true,
+                    "colleague": true
+                }
+            },
+            "2": {
+                "msg": "available",
+                "color": "orange",
+                "visibility": {
+                    "student": false,
+                    "researcher": true,
+                    "colleague": true
+                }
+            },
+            "3": {
+                "msg": "test",
+                "color": "orange",
+                "visibility": {
+                    "student": false,
+                    "researcher": false,
+                    "colleague": false
+                }
             }
         }
     }
