@@ -15,7 +15,8 @@
                     "student": true,
                     "researcher": true,
                     "colleague": true
-                }
+                },
+                "id": "0"
             },
             "1": {
                 "msg": "in his office but busy",
@@ -24,7 +25,8 @@
                     "student": false,
                     "researcher": true,
                     "colleague": true
-                }
+                },
+                "id": "1"
             },
             "2": {
                 "msg": "available",
@@ -33,7 +35,8 @@
                     "student": false,
                     "researcher": true,
                     "colleague": true
-                }
+                },
+                "id": "2"
             },
             "3": {
                 "msg": "test",
@@ -42,15 +45,22 @@
                     "student": false,
                     "researcher": false,
                     "colleague": false
-                }
+                },
+                "id": "3"
             }
-        }
+        },
+        "default": {
+            "available": "I'm available !",
+            "busy": "I'm busy !",
+            "unavailable": "I'm unavailable !"
+        },
+        "tracking": "OFF"
     },
     "2": {
         "id": "2",
         "pp": "1.jpg",
-        "firstName": "Leonard Leakey",
-        "lastName": "Hofstadter",
+        "firstName": "Brena",
+        "lastName": "Carlson",
         "building": "EV",
         "office": "1186",
         "department": "Computer Science",
@@ -91,13 +101,19 @@
                     "colleague": false
                 }
             }
-        }
+        },
+        "default": {
+            "available": "I'm available !",
+            "busy": "I'm busy !",
+            "unavailable": "I'm unavailable !"
+        },
+        "tracking": "ON"
     },
     "3": {
         "id": "3",
         "pp": "1.jpg",
-        "firstName": "Leonard Leakey",
-        "lastName": "Hofstadter",
+        "firstName": "Rueben",
+        "lastName": "Benjamin",
         "building": "ER",
         "office": "1186",
         "department": "Computer Science",
@@ -138,13 +154,19 @@
                     "colleague": false
                 }
             }
-        }
+        },
+        "default": {
+            "available": "I'm available !",
+            "busy": "I'm busy !",
+            "unavailable": "I'm unavailable !"
+        },
+        "tracking": false
     },
     "4": {
         "id": "1",
         "pp": "1.jpg",
-        "firstName": "Leonard Leakey",
-        "lastName": "Hofstadter",
+        "firstName": "Caroline",
+        "lastName": "Bruce",
         "building": "ER",
         "office": "1186",
         "department": "Computer Science",
@@ -185,13 +207,19 @@
                     "colleague": false
                 }
             }
-        }
+        },
+        "default": {
+            "available": "I'm available !",
+            "busy": "I'm busy !",
+            "unavailable": "I'm unavailable !"
+        },
+        "tracking": "ON"
     },
     "5": {
         "id": "5",
         "pp": "1.jpg",
-        "firstName": "Leonard Leakey",
-        "lastName": "Hofstadter",
+        "firstName": "Adeline",
+        "lastName": "Cotton",
         "building": "ER",
         "office": "1186",
         "department": "Computer Science",
@@ -232,6 +260,12 @@
                     "colleague": false
                 }
             }
-        }
+        },
+        "default": {
+            "available": "I'm available !",
+            "busy": "I'm busy !",
+            "unavailable": "I'm unavailable !"
+        },
+        "tracking": "ON"
     }
 }

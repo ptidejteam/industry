@@ -8,6 +8,18 @@ const JSONdb = require('simple-json-db');
 const db_staff = new JSONdb(path.resolve('./database/staff.json')); 
 const db_data = new JSONdb(path.resolve('./database/db.json'));
 
+// Import dotvenv file
+require('dotenv').config();
+const config = process.env;
+
+//Ipfilter config
+const ipfilter = require('express-ipfilter').IpFilter;
+const ipfilterConfig = {
+    mode: "allow",
+    logLevel: "deny"
+};
+const authorizedIPs = [config.REMOTE_WEBSERVER_IP];
+
 const apiRouter = express.Router();
 
 apiRouter.use("/filter", filterRouter)
@@ -16,7 +28,7 @@ apiRouter.get('/pp/:pp',async(req,res)=>{
     res.sendFile("/pp/" + req.params.pp, {'root': __dirname + "/.."});
 });
 
-apiRouter.get('/states',async(req,res)=>{
+apiRouter.get('/states', ipfilter(authorizedIPs, ipfilterConfig), async(req,res)=>{
     let states = {};
     try{
         states = db_staff.JSON();
@@ -27,7 +39,7 @@ apiRouter.get('/states',async(req,res)=>{
     res.send(states).status(200);
 });
 
-apiRouter.get('/current-state/:id', async (req,res)=>{
+apiRouter.get('/current-state/:id', ipfilter(authorizedIPs, ipfilterConfig), async (req,res)=>{
     const id = req.params.id;
     if (db_data.has(id)){
         const currentState = await db_data.get(id);

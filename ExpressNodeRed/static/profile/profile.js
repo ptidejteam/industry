@@ -2,7 +2,7 @@ $(function(){
 
     let counter = 0;
 
-    $(document).ready( function () {
+    jQuery( function () {
         $('[id^=color-selector]').each(function() {
             const initColor = $(this).attr('init');
             $(this).val(initColor);
@@ -18,6 +18,17 @@ $(function(){
                 $(this).attr('checked', true);
             }
         });
+
+        $('[id^=default-message-').each(function(e){
+            $(this).next().text($(this).children('input').val());
+        });
+
+        if ($('#tracker').val() === "ON") {
+            $('#tracker').addClass('tracker-on');
+        } else {
+            $('#tracker').addClass('tracker-off');
+        }
+
     });
 
     $('[id^=visibility-').on('change', function() {
@@ -77,16 +88,15 @@ $(function(){
 
     $('#my-flow').on("click", function(e){
         e.preventDefault();
-        const params = {"id": "Get Fitbit Profile"};
-        let isClosed = 0;
 
         alertify.confirm("You're going to be redirected on Node-RED interface. Please only edit the tab that corresponds to your profile.", function (e) {
             if (e) {
                 $.ajax({
-                    url: 'http://localhost:8000/red?' + $.param(params),
+                    url: 'http://localhost:8000/myflow',
                     type: 'GET',
                     success: function(data){
                         console.log(data);
+                        window.open("http://localhost:8000/red/#flow/" + data.id, "_blank");
                     },
                     error: function(data){
                         console.log(data);
@@ -99,7 +109,8 @@ $(function(){
     $('#save-states').on("click", function(e){
         const payload = {
             "id": "",
-            "states": {}
+            "states": {},
+            "default": {},
         };
         payload.id = "1"; //TODO: get the id from the user session
 
@@ -124,6 +135,12 @@ $(function(){
                 
         });
 
+        $('[id^=default-message-]').each(function(e){
+            const id = $(this).attr('id').split("-")[2];
+            const msg = $(this).children('input').val();
+            payload.default[id] = msg;
+        });
+
         e.preventDefault();
         $.ajax({
             url: 'http://localhost:8000/update-states',
@@ -145,11 +162,8 @@ $(function(){
     $('#logout-btn').on("click", function(e){
         e.preventDefault();
         $.ajax({
-            url: 'http://localhost:8000/auth/logout',
+            url: 'http://localhost:8000/logout',
             type: 'POST',
-            data: JSON.stringify(payload),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
             success: function(data){
                 console.log(data);
             },
@@ -160,4 +174,53 @@ $(function(){
 
         location.reload();
     });
+
+    $('#tracker').on("hover", function() {
+        const initText = $(this).text();
+        let newText = "";
+        if ($(this).attr('value') === "ON") {
+            newText = "Turn OFF";
+        } else {
+            newText = "Turn ON";
+        }
+        $(this).text(newText);
+            $('#tracker').mouseleave(function() {
+                $(this).text(initText);
+            });
+    });
+
+    $('#tracker').on("click", function(e){
+        e.preventDefault();
+        let that = $(this);
+        payload = {
+            state: ""
+        }
+        if ($(this).attr('value') === "ON") {
+            payload.state = "OFF";
+        } else {
+            payload.state = "ON";
+        }
+
+        $.ajax({
+            url: 'http://localhost:8000/tracker/update',
+            type: 'POST',
+            data: JSON.stringify(payload),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data){
+                that.attr('value', data.new);
+                location.reload();
+            },
+            error: function(data){
+                console.log(data);
+            }
+        });
+    });
+
+    $('[id^=default-message-').on("keyup", function(e){
+        $(this).next().text($(this).children('input').val());
+        $("#save-states").removeAttr("disabled");
+    });
+
+
 });

@@ -50,7 +50,7 @@
 <body id="profile">
     <header>
         <img src="/logo.svg">
-        <h1>wimp</h1>
+        <h1>WIMP</h1>
         <button id="logout-btn" class="pntr">Logout</button>
     </header>
     <section id="main">
@@ -93,16 +93,45 @@
                 {{/states}}
             </div>
 
+            <div id="default-messages" class="default-messages">
+                <div class="input-default">
+                    <div id="default-message-available" class="default-message">
+                        <p>Available default message :</p>
+                        <input type="text" value="{{default.available}}" maxlength = "25">
+                    </div>
+                    <p class="status green" style="margin-left: 10px;">{{msg}}</p>
+                </div>
+
+                <div class="input-default">
+                    <div id="default-message-busy" class="default-message">
+                        <p>Busy default message :</p>
+                        <input type="text" value="{{default.busy}}" maxlength = "25">
+                    </div>
+                    <p class="status orange" style="margin-left: 10px;">{{msg}}</p>
+                </div>
+                
+                <div class="input-default">
+                    <div id="default-message-unavailable" class="default-message">
+                        <p>Unavailable default message :</p>
+                        <input type="text" value="{{default.unavailable}}" maxlength = "25">
+                    </div>
+                    <p class="status red" style="margin-left: 10px;">{{msg}}</p>
+                </div>
+                              
+            </div>
+
         </main>
         <div class="states-control">
             <button class="pntr" id="add-state">+ State</button>
             <button class="pntr" id="save-states">Save</button>
+            <button class="pntr" id="tracker" value="{{tracking}}">Tracker {{tracking}}</button>
+
         </div>
         
         <button class="pntr" id="my-flow">My flow</button>
         
     </section>
-    <footer>
+    <footer class="relative-footer">
         <h3>&copy; 2022 wimp</h3>
     </footer>
     

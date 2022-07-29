@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,34 +9,35 @@
     --bg: #FFFFFF;
     --shadow: 0 2px 5px #00000034;
     --grey: rgb(128, 128, 128);
-
     --greenT: #00C15915;
     --redT: #EE463C15;
     --orangeT: #F8BC2220;
+    --small-text: 14px;
     font-family: 'Open Sans', sans-serif;
 }
 
-body{
+body {
     margin-top: 30px;
     background-color: #F5F5F5;
     height: 100%;
 }
 
-h1{
+h1 {
     font-size: 18px;
 }
-h2{
+
+h2 {
     font-size: 16px;
     font-weight: 600;
 }
 
-h3{
+h3 {
     font-weight: 200;
     color: var(--grey);
     font-size: 15px;
 }
 
-header{
+header {
     display: flex;
     flex-flow: row;
     align-items: center;
@@ -44,15 +45,20 @@ header{
     margin-bottom: 20px;
 }
 
-header img{
+header img {
     height: 50px;
     margin-right: 10px;
 }
-header button{
+
+header button {
     margin-left: auto;
 }
 
-button{
+header h1 {
+    cursor: default;
+}
+
+button {
     color: var(--main);
     padding: 8px 35px;
     transition: background-color 0.2s, color 0.2s;
@@ -61,13 +67,12 @@ button{
     background-color: transparent;
 }
 
-button:hover{
+button:hover {
     background-color: var(--main);
     color: var(--bg);
 }
 
-nav{
-    
+nav {  
     width: 60vw;
     display: grid;
     grid-template-columns: 200px 250px auto;
@@ -75,7 +80,7 @@ nav{
     margin-bottom: 50px;
 }
 
-nav .select-box{
+nav .select-box {
     background-color: var(--bg);
     display: flex;
     flex-flow: row;
@@ -85,44 +90,43 @@ nav .select-box{
     width: fit-content;
 }
 
-.select-box h2{
+.select-box h2 {
     margin-right: 10px;
 }
 
-nav select{
+nav select {
     background-color: var(--bg);
     outline: none;
     border: none;
 }
 
-
-nav div:last-child{
+nav div:last-child {
     display: flex;
     flex-flow: row ;
     align-items: center;
 }
 
-nav input{
+nav input {
     width: 100%;
 }
 
-input{
+input {
     background-color: var(--bg);
     outline: none;
     border: none;
     padding: 10px 25px;
 }
 
-.ov{
+.ov {
     box-shadow: var(--shadow);
     border: 1px solid transparent;
 }
 
-.ov:hover{
+.ov:hover {
     border: 1px solid var(--main);
 }
 
-main{
+main {
     margin: 0 auto;
     width: 60vw;
     display: grid;
@@ -130,22 +134,18 @@ main{
     row-gap: 20px
 }
 
-
-.card p{
+.card p {
     margin-top: auto;
     margin-bottom: 20px;
 }
 
-.card img{
+.card img {
     width: 70px;
     height: 70px;
     border-radius: 100px;
     margin-top: 20px;
     margin-bottom: 10px;
 }
-
-
-/* SHORTCUt */
 
 .card{
     background-color: var(--bg);
@@ -154,14 +154,15 @@ main{
     width: 170px;
     height: 240px;
     border-radius: 15px;
-
     display: flex;
     flex-flow: column;
     align-items: center;
 }
+
 .card h1{
     text-align: center;
 }
+
 .card:hover{
     border: 1px solid var(--main);
     width: 172px;
@@ -170,7 +171,7 @@ main{
 }
 
 .status{
-    font-size: 14px;
+    font-size: var(--small-text);
     padding: 7px 20px;
     border-radius: 100px;
     text-align: center;
@@ -185,10 +186,12 @@ main{
     background-color: var(--orangeT);
     color: var(--orange);
 }
+
 .status.red{
     background-color: var(--redT);
     color: var(--red);
 }
+
 .status.state{
     background-color: #F5F5F5;
     color: var(--grey);
@@ -198,11 +201,19 @@ main{
     cursor: pointer;
 }
 
-footer {
+.relative-footer {
     position: relative;
     bottom: 0;
     width: 100%;
     text-align: center;
-    margin-top: 80px;
+    margin-top: 40px;
+}
+
+.fixed-footer {
+    position: fixed;
+    left: 0;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
 }
 
