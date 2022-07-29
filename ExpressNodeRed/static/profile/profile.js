@@ -175,7 +175,7 @@ $(function(){
         location.reload();
     });
 
-    $('#tracker').on("hover", function() {
+    $('#tracker').on("mouseover", function() {
         const initText = $(this).text();
         let newText = "";
         if ($(this).attr('value') === "ON") {
@@ -184,7 +184,7 @@ $(function(){
             newText = "Turn ON";
         }
         $(this).text(newText);
-            $('#tracker').mouseleave(function() {
+            $('#tracker').on('mouseleave', function() {
                 $(this).text(initText);
             });
     });

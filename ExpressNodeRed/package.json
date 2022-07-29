@@ -25,7 +25,6 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
-    "query-string": "^7.1.1",
     "request": "^2.88.2",
     "simple-json-db": "^2.0.0"
   }

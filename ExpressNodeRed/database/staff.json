@@ -15,18 +15,16 @@
                     "student": true,
                     "researcher": true,
                     "colleague": true
-                },
-                "id": "0"
+                }
             },
             "1": {
                 "msg": "in his office but busy",
                 "color": "orange",
                 "visibility": {
-                    "student": false,
+                    "student": true,
                     "researcher": true,
                     "colleague": true
-                },
-                "id": "1"
+                }
             },
             "2": {
                 "msg": "available",
@@ -35,8 +33,7 @@
                     "student": false,
                     "researcher": true,
                     "colleague": true
-                },
-                "id": "2"
+                }
             },
             "3": {
                 "msg": "test",
@@ -45,8 +42,7 @@
                     "student": false,
                     "researcher": false,
                     "colleague": false
-                },
-                "id": "3"
+                }
             }
         },
         "default": {
@@ -54,7 +50,7 @@
             "busy": "I'm busy !",
             "unavailable": "I'm unavailable !"
         },
-        "tracking": "OFF"
+        "tracking": "ON"
     },
     "2": {
         "id": "2",
@@ -160,7 +156,7 @@
             "busy": "I'm busy !",
             "unavailable": "I'm unavailable !"
         },
-        "tracking": false
+        "tracking": "ON"
     },
     "4": {
         "id": "1",

@@ -1,16 +1,12 @@
 // ----------- IMPORTS -----------
 
 // Imports for JSON database management
-const JSONdb = require('simple-json-db');
-//const db = new JSONdb('./db.json');
-const db_auth = new JSONdb('./database/credentials.json');
-const db_staff = new JSONdb('./database/staff.json');
+let JSONdb = require('simple-json-db');
 
 // Imports for Web Server management
 var http = require('http');
 var express = require("express");
 const bodyParser = require('body-parser');
-const queryString = require('query-string');
 var path = require('path');
 
 // Import for Node-RED management
@@ -58,7 +54,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // Use custom modules
-app.use('/node-red', nodeRedRouter);
 app.use('/api', apiRouter);
 
 // Passport config
@@ -67,9 +62,12 @@ const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy
 
 app.use(session({
-    secret: "secret",
+    secret: config.SESSION_SECRET,
     resave: false ,
-    saveUninitialized: true 
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 3600000
+    }
 }));
 
 app.use(passport.initialize());
@@ -77,6 +75,7 @@ app.use(passport.session());
 
 passport.use(new LocalStrategy(
     (username, password, done) => {
+        let db_auth = new JSONdb('./database/credentials.json');
         let reel_password = db_auth.get(username);
         if (reel_password != password){
             console.log('Failed to authorize : ' + username);
@@ -182,6 +181,7 @@ app.get('/profile/:id', checkAuthenticated,
         }
     },
     async (req,res)=>{
+        const db_staff = new JSONdb('./database/staff.json');
         var teacher = await db_staff.get(req.params.id);
         Object.keys(teacher.states).forEach(key => {
             teacher.states[key].id = key;
@@ -202,6 +202,7 @@ app.post('/update-states', checkAuthenticated, function(req, res) {
     const id = req.user.id;
     const states = req.body.states;
     const defaults = req.body.default;
+    let db_staff = new JSONdb('./database/staff.json');
     if (!db_staff.has(id)) {
         res.send("No user found").status(404);
     }
@@ -219,6 +220,7 @@ app.post('/update-states', checkAuthenticated, function(req, res) {
 app.post('/tracker/update', checkAuthenticated, function(req, res) {
     const id = req.user.id;
     const state = req.body.state;
+    let db_staff = new JSONdb('./database/staff.json');
     if (!db_staff.has(id)) {
         res.send("No user found").status(404);
     }

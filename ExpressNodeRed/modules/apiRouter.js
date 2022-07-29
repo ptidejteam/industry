@@ -5,8 +5,6 @@ const filterRouter = require("./filterRouter");
 
 // DB config
 const JSONdb = require('simple-json-db');
-const db_staff = new JSONdb(path.resolve('./database/staff.json')); 
-const db_data = new JSONdb(path.resolve('./database/db.json'));
 
 // Import dotvenv file
 require('dotenv').config();
@@ -29,6 +27,7 @@ apiRouter.get('/pp/:pp',async(req,res)=>{
 });
 
 apiRouter.get('/states', ipfilter(authorizedIPs, ipfilterConfig), async(req,res)=>{
+    const db_staff = new JSONdb('./database/staff.json');
     let states = {};
     try{
         states = db_staff.JSON();
@@ -36,10 +35,12 @@ apiRouter.get('/states', ipfilter(authorizedIPs, ipfilterConfig), async(req,res)
     catch (e){
         console.log(e);   
     }
+    console.log(states);
     res.send(states).status(200);
 });
 
 apiRouter.get('/current-state/:id', ipfilter(authorizedIPs, ipfilterConfig), async (req,res)=>{
+    const db_data = new JSONdb(path.resolve('./database/db.json'));
     const id = req.params.id;
     if (db_data.has(id)){
         const currentState = await db_data.get(id);

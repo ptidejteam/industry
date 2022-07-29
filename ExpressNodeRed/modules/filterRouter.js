@@ -3,20 +3,20 @@ var path = require('path');
 
 // DB config
 const JSONdb = require('simple-json-db');
-const db_staff = new JSONdb(path.resolve('./database/staff.json')); 
 
 const filterRouter = express.Router({mergeParams: true});
 
 filterRouter.get('/department',async(req,res)=>{
     let staff = {};
     let departments = [];
-    try{
+    const db_staff = new JSONdb(path.resolve('./database/staff.json'));
+    try {
         staff = db_staff.JSON();
         Object.values(staff).forEach(it => {
             if (!departments.includes(it.department)) { departments.push(it.department)};
         });
     }
-    catch (e){
+    catch (e) {
         console.log(e);   
     }
     res.json(departments).status(200);
@@ -25,13 +25,14 @@ filterRouter.get('/department',async(req,res)=>{
 filterRouter.get('/building',async(req,res)=>{
     let staff = {};
     let buildings = [];
-    try{
+    const db_staff = new JSONdb(path.resolve('./database/staff.json'));
+    try {
         staff = db_staff.JSON();
         Object.values(staff).forEach(it => {
             if (!buildings.includes(it.building)) { buildings.push(it.building)};
         });
     }
-    catch (e){
+    catch (e) {
         console.log(e);   
     }
     res.json(buildings).status(200);
